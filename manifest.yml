@@ -1,0 +1,8 @@
+---
+applications:
+- name: urax-rest-service
+  memory: 256M
+  instances: 1
+  host: urax-rest-service
+  domain: org.mac
+  path: build/libs/urax-rest-service-0.1.0.jar
