@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "9d7b4906-309f-46b2-86f4-6324870515b2",
+		"name": "urax-requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26267427"
+	},
+	"item": [
+		{
+			"name": "Products-noarg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.get(\"variable_key\");\r",
+							"pm.test(\"Verify http status\", function(){\r",
+							"    pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Verify data content\", function(){\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.length).to.gte(9);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/publikt/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publikt",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
