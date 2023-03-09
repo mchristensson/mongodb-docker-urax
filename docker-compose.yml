@@ -1,0 +1,40 @@
+# HOW-TO:
+#
+# docker compose  create
+# docker compose run -d uraxapp
+# docker compose stop uraxapp
+#
+services:
+  uraxapp:
+    build: ./urax-app
+    depends_on:
+      - uraxdb
+    links:
+      - uraxdb
+    ports:
+      - "8080:8080"
+    networks:
+      - urax-network
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
+
+  uraxdb:
+    build: ./urax-db
+    networks:
+      - urax-network
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=uraxmysqluser
+      - MYSQL_PASSWORD=uraxmysqlpw
+      - MYSQL_DATABASE=inventory
+
+networks:
+  urax-network: {}
