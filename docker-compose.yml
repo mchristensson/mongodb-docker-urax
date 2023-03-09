@@ -34,7 +34,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=uraxmysqluser
       - MYSQL_PASSWORD=uraxmysqlpw
-      - MYSQL_DATABASE=inventory
+#      - MYSQL_DATABASE=inventory
 
 networks:
   urax-network: {}

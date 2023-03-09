@@ -11,21 +11,21 @@ GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT  ON 
 
 # Create the database that we'll use to populate data and watch the effect in the binlog
 CREATE DATABASE inventory;
-GRANT ALL PRIVILEGES ON inventory.* TO 'mysqluser'@'%';
+GRANT ALL PRIVILEGES ON inventory.* TO 'uraxmysqluser'@'%';
 
 # Switch to this database
 USE inventory;
 
-# Create and populate our products using a single insert with many rows
-CREATE TABLE products (
+# Create and populate our product using a single insert with many rows
+CREATE TABLE product (
   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(512),
   weight FLOAT
 );
-ALTER TABLE products AUTO_INCREMENT = 101;
+ALTER TABLE product AUTO_INCREMENT = 101;
 
-INSERT INTO products
+INSERT INTO product
 VALUES (default,"scooter","Small 2-wheel scooter",3.14),
        (default,"car battery","12V car battery",8.1),
        (default,"12-pack drill bits","12-pack of drill bits with sizes ranging from #40 to #3",0.8),
@@ -36,22 +36,22 @@ VALUES (default,"scooter","Small 2-wheel scooter",3.14),
        (default,"jacket","water resistent black wind breaker",0.1),
        (default,"spare tire","24 inch spare tire",22.2);
 
-# Create and populate the products on hand using multiple inserts
-CREATE TABLE products_on_hand (
+# Create and populate the product on hand using multiple inserts
+CREATE TABLE product_on_hand (
   product_id INTEGER NOT NULL PRIMARY KEY,
   quantity INTEGER NOT NULL,
-  FOREIGN KEY (product_id) REFERENCES products(id)
+  FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
-INSERT INTO products_on_hand VALUES (101,3);
-INSERT INTO products_on_hand VALUES (102,8);
-INSERT INTO products_on_hand VALUES (103,18);
-INSERT INTO products_on_hand VALUES (104,4);
-INSERT INTO products_on_hand VALUES (105,5);
-INSERT INTO products_on_hand VALUES (106,0);
-INSERT INTO products_on_hand VALUES (107,44);
-INSERT INTO products_on_hand VALUES (108,2);
-INSERT INTO products_on_hand VALUES (109,5);
+INSERT INTO product_on_hand VALUES (101,3);
+INSERT INTO product_on_hand VALUES (102,8);
+INSERT INTO product_on_hand VALUES (103,18);
+INSERT INTO product_on_hand VALUES (104,4);
+INSERT INTO product_on_hand VALUES (105,5);
+INSERT INTO product_on_hand VALUES (106,0);
+INSERT INTO product_on_hand VALUES (107,44);
+INSERT INTO product_on_hand VALUES (108,2);
+INSERT INTO product_on_hand VALUES (109,5);
 
 # Create some customers ...
 CREATE TABLE customers (
@@ -97,7 +97,7 @@ CREATE TABLE orders (
   quantity INTEGER NOT NULL,
   product_id INTEGER NOT NULL,
   FOREIGN KEY order_customer (purchaser) REFERENCES customers(id),
-  FOREIGN KEY ordered_product (product_id) REFERENCES products(id)
+  FOREIGN KEY ordered_product (product_id) REFERENCES product(id)
 ) AUTO_INCREMENT = 10001;
 
 INSERT INTO orders
