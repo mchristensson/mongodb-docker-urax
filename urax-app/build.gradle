@@ -11,17 +11,21 @@ sourceCompatibility = '17'
 repositories {
 	mavenCentral()
 }
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	if(System.getProperty("spring.profiles.active") == "dev") {
+	if(System.getenv('spring.profiles.active') == 'dev') {
+		println("Using H2 as backend...")
 		runtimeOnly 'com.h2database:h2'
 	} else {
-		println("Använder inte H2")
+		println("Using mysql as backend")
+		runtimeOnly 'com.mysql:mysql-connector-j'
 	}
 }
 
