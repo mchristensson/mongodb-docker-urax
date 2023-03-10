@@ -16,6 +16,7 @@ export class ProductListComponent {
     console.log("ngoninit fetch from service...")
     this.apiService.getProducts().subscribe(productData => {
       this.products = productData;
+      console.log("Produtcs: ", this.products)
     });
   }
 
