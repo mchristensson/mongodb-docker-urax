@@ -19,7 +19,7 @@ public class HttpRequestTest {
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate
-                .getForObject("http://localhost:" + port + "/publikt/greeting", String.class))
+                .getForObject("http://localhost:" + port + "/api/greeting", String.class))
                 .contains("Hello, World");
     }
 }

@@ -4,6 +4,7 @@ docker compose down
 echo "Removing images..."
 docker image rm urax-uraxapp
 docker image rm urax-uraxdb
+docker image rm urax-reverseproxy
 
 echo "Running script"
 CUR_DIR=$(pwd)

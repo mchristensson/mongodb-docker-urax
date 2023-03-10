@@ -40,7 +40,7 @@ public class UraxRestControllerTests {
 
     @Test
     public void greeting_whenNoParam_ShouldReturnDefaultMessage() throws Exception {
-        this.mockMvc.perform(get("/publikt/greeting"))
+        this.mockMvc.perform(get("/api/greeting"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content")
@@ -49,7 +49,7 @@ public class UraxRestControllerTests {
 
     @Test
     public void greeting_whenParam_ShouldReturnTailoredMessage() throws Exception {
-        this.mockMvc.perform(get("/publikt/greeting")
+        this.mockMvc.perform(get("/api/greeting")
                         .param("name", "Spring Community"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -62,7 +62,7 @@ public class UraxRestControllerTests {
         PersonSearchResult mockResult = new PersonSearchResult();
         mockResult.setCount(0);
         when(personService.freeTextSearch(anyString())).thenReturn(mockResult);
-        this.mockMvc.perform(get("/publikt/person/find"))
+        this.mockMvc.perform(get("/api/person/find"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.count")
@@ -78,7 +78,7 @@ public class UraxRestControllerTests {
         mockResult.setCount(2);
         when(personService.freeTextSearch(anyString())).thenReturn(mockResult);
         this.mockMvc
-                .perform(get("/publikt/person/find")
+                .perform(get("/api/person/find")
                         .param("query", "Bob"))
                 .andDo(print())
                 .andExpect(status().isOk())

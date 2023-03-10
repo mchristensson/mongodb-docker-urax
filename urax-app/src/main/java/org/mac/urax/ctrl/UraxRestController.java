@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping("publikt")
+@RequestMapping("api")
 public class UraxRestController implements ErrorController {
 
     private static final Logger logger = LoggerFactory.getLogger(UraxRestController.class);
